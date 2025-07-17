@@ -22,7 +22,7 @@ def translate_live():
 def breakdown():
     telugu_text = request.json['text']
     words = telugu_text.strip().replace("?", "").replace("।", "").split()
-    
+
     breakdown = []
     for word in words:
         try:
@@ -43,4 +43,4 @@ def breakdown():
     return jsonify({"breakdown": breakdown})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
