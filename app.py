@@ -14,17 +14,17 @@ def translate():
     translated = translator.translate(text, src='hi', dest='te')
     return jsonify({"translation": translated.text})
 
-@app.route('/translate-live', methods=['POST'])  # 🆕 Added for Telugu → Hindi
+@app.route('/translate-live', methods=['POST'])
 def translate_live():
     text = request.json['text']
-    translated = translator.translate(text, src='te', dest='hi')  # Force Telugu → Hindi
+    translated = translator.translate(text, src='te', dest='hi')
     return jsonify({"translation": translated.text})
 
 @app.route('/breakdown', methods=['POST'])
 def breakdown():
     telugu_text = request.json['text']
     words = telugu_text.strip().replace("?", "").replace("।", "").split()
-    
+
     breakdown = []
     for word in words:
         try:
@@ -35,7 +35,7 @@ def breakdown():
             roman = transliterate(word, TELUGU, ITRANS)
         except:
             roman = "—"
-        
+
         breakdown.append({
             "telugu": word,
             "roman": roman,
